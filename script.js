@@ -4,6 +4,22 @@ const mockUp = [
   {id: 3, "name": "Such a night", "artist": "Elvis", "genre": "pop", "duration": 2.55, "isChecked": false}
 ]
 
+const addNewEntry = dataArray => {
+  //create new object
+  let newObject = {id: dataArray.length + 1}
+  let formElements = document.getElementsByClassName('form-el')
+  newObject.name = formElements[0].value
+  newObject.artist = formElements[1].value
+  newObject.genre = formElements[2].value
+  newObject.duration = formElements[3].value
+  newObject.isChecked = false
+  //pushing to array 
+  dataArray.length = dataArray.length + 1
+  dataArray.push(newObject)
+  //re-rendering
+  onRender(mockUp)
+}
+
 const onRender = dataArray => {
   const tableBody = document.querySelector('tbody')
   tableBody.innerHTML = ''
@@ -26,5 +42,17 @@ const onRender = dataArray => {
   })
 }
 
+//form doesn't refresh
+var form = document.getElementById("myForm");
+function handleForm(event) { 
+  event.preventDefault(); 
+} 
+form.addEventListener('submit', handleForm);
+
 
 onRender(mockUp)
+
+//event listener for submit button - add.
+const submitBtn = document.querySelector('input[type=submit]')
+submitBtn.addEventListener('click', () => addNewEntry(mockUp))
+

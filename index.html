@@ -2,39 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous"> 
     <title>Title</title>
 </head>
 <body>
+    
     <h1>Music table of songs</h1>
-    <form>
-        <input type="text" placeholder="name"/>
-        <input type="text" placeholder="artist"/>
-        <input type="text" placeholder="genre"/>
-        <input type="number" placeholder="duration"/>
-        <input type="submit"/>
-    </form>
-    <table>
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>name</th>
-                <th>artist</th>
-                <th>genre</th>
-                <th>duration</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-<!--            <tr>-->
-<!--                <td>1</td>-->
-<!--                <td>Man in the mirror</td>-->
-<!--                <td>Michael Jackson</td>-->
-<!--                <td>Pop</td>-->
-<!--                <td>4.25</td>-->
-<!--                <td><input type="checkbox"/></td>-->
-<!--            </tr>-->
-        </tbody>
-    </table>
+    <div class="content-wrapper">
+        <form id="myForm">
+            <input type="text" placeholder="name" class="form-el"/>
+            <input type="text" placeholder="artist" class="form-el"/>
+            <input type="text" placeholder="genre" class="form-el"/>
+            <input type="number" placeholder="duration" class="form-el"/>
+            <input type="submit"/>
+        </form>
+        <table>
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>artist</th>
+                    <th>genre</th>
+                    <th>duration</th>
+                    <th>check</th>
+                </tr>
+            </thead>
+            <tbody>
+    <!--            <tr>-->
+    <!--                <td>1</td>-->
+    <!--                <td>Man in the mirror</td>-->
+    <!--                <td>Michael Jackson</td>-->
+    <!--                <td>Pop</td>-->
+    <!--                <td>4.25</td>-->
+    <!--                <td><input type="checkbox"/></td>-->
+    <!--            </tr>-->
+            </tbody>
+        </table>
+        <div class="buttons">
+            <button><i class="fas fa-edit"></i>Edit</button>
+            <button><i class="fas fa-search"></i>Search</button>
+            <button><i class="fas fa-trash"></i>Delete</button>
+        </div>
+    </div>
     <script src="./script.js"></script>
 </body>
 </html>
