@@ -12,6 +12,9 @@ const validation = (inputs) => {
   if(!inputs[2].value.length < 3) {
     errors.genre = "genre must have more than 3"
   }
+  if (!inputs[3].value) {
+    errors.duration = "duration must not be empty"
+  }
   return Object.keys(errors).length && errors
 }
 
@@ -84,3 +87,28 @@ const columnHeadings = document.querySelectorAll('thead > tr > th')
 columnHeadings.forEach(item => {
   item.addEventListener('click', () => sortTable(item, mockUp))
 })
+
+//****************FILTER*******************//
+const myInputs = document.getElementsByClassName('form-el')
+
+for (let i = 0; i < myInputs.length; i++) {
+  myInputs[i].addEventListener('keyup', () => {
+    const value = myInputs[0].value
+    const data = searchName(value, mockUp)
+    onRender(data)
+  })
+}
+
+function searchName(value, data) {
+  let filteredData = []
+
+  for (let i = 0; i < data.length; i++) {
+    value = value.toLowerCase()
+    const name = data[i].name.toLowerCase()
+
+    if (name.includes(value)) {
+      filteredData.push(data[i])
+    }
+  }
+  return filteredData
+}

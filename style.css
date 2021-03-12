@@ -63,7 +63,8 @@ input[type="checkbox"] {
     left: 50px;
     top: 12px;
 }
-.buttons > button {
+.buttons > button,
+#search {
     padding: 10px 50px;
     font-size: 1em;
     margin-top: 70px;
@@ -76,7 +77,8 @@ input[type="checkbox"] {
 .buttons i {
     padding-right: 7px;
 }
-.buttons > button:hover {
+.buttons > button:hover,
+#search:hover {
     background-color: rgb(68, 67, 67);
     color: #fff;
 }
