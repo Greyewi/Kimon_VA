@@ -89,26 +89,19 @@ columnHeadings.forEach(item => {
 })
 
 //****************FILTER*******************//
-const myInputs = document.getElementsByClassName('form-el')
+const myInputSearch = document.getElementById('search')
+myInputSearch.addEventListener('input', () => {
+  const value = myInputSearch.value
+  const data = searchName(value, mockUp)
+  onRender(data)
+})
 
-for (let i = 0; i < myInputs.length; i++) {
-  myInputs[i].addEventListener('keyup', () => {
-    const value = myInputs[0].value
-    const data = searchName(value, mockUp)
-    onRender(data)
-  })
-}
 
 function searchName(value, data) {
-  let filteredData = []
-
-  for (let i = 0; i < data.length; i++) {
-    value = value.toLowerCase()
-    const name = data[i].name.toLowerCase()
-
-    if (name.includes(value)) {
-      filteredData.push(data[i])
+  return data.filter((item) => {
+    for(let key in item) {
+      if(item[key].toString(10).toLowerCase().includes(value.toLowerCase())) return true
     }
-  }
-  return filteredData
+    return false
+  })
 }

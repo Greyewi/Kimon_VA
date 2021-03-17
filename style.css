@@ -71,7 +71,6 @@ input[type="checkbox"] {
     margin-left: 30px;
     margin-right: 30px;
     transition: all 0.3s ease-in-out;
-    cursor: pointer;
     background-color:rgb(209, 204, 204);
 }
 .buttons i {
