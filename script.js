@@ -11,7 +11,7 @@ const validation = (inputs) => {
   if(!inputs[0].value) {
     errors.name = "name must not be empty"
   }
-  if(!inputs[2].value.length < 3) {
+  if(inputs[2].value.length < 3) {
     errors.genre = "genre must have more than 3"
   }
   if (!inputs[3].value) {
@@ -33,7 +33,6 @@ const addNewEntry = (dataArray, event) => {
   newObject.artist = formElements[1].value
   newObject.genre = formElements[2].value
   newObject.duration = formElements[3].value
-  newObject.isChecked = false
   //pushing to array 
   dataArray.length = dataArray.length + 1
   dataArray.push(newObject)
@@ -121,3 +120,18 @@ myCheckedInputs.forEach(inputEl => {
     console.log(checkedFields)
   })
 })
+
+//****************DELETE*******************//
+const deleteBtn = document.getElementById('delete')
+deleteBtn.addEventListener('click', () => {
+  const data = removeEntry(mockUp)
+  onRender(data)
+})
+
+function removeEntry(data) {
+  return data.filter((item) => {
+    if(!checkedFields.has(item['id'].toString())) return true 
+  })
+}
+
+//why doesn't it work after one delete?
