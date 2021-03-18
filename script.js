@@ -1,8 +1,10 @@
 const mockUp = [
-  {id: 1, "name": "Man in the mirror", "artist": "Michael Jackson", "genre": "pop", "duration": 4.24, "isChecked": false},
-  {id: 2, "name": "Heart break hotel", "artist": "Elvis", "genre": "rock-and-roll", "duration": 2.08, "isChecked": false},
-  {id: 3, "name": "Such a night", "artist": "Elvis", "genre": "pop", "duration": 2.55, "isChecked": false}
+  {id: 1, "name": "Man in the mirror", "artist": "Michael Jackson", "genre": "pop", "duration": 4.24},
+  {id: 2, "name": "Heart break hotel", "artist": "Elvis", "genre": "rock-and-roll", "duration": 2.08},
+  {id: 3, "name": "Such a night", "artist": "Elvis", "genre": "pop", "duration": 2.55}
 ]
+
+const checkedFields = new Set([])
 
 const validation = (inputs) => {
   const errors = {}
@@ -62,16 +64,15 @@ const onRender = dataArray => {
     const tr = document.createElement('tr')
     for(let key in line){
       const td = document.createElement('td')
-      if(key === 'isChecked') {
-        const input = document.createElement('input')
-        input.setAttribute('type', 'checkbox')
-        input.value = line[key]
-        tr.append(input)
-      } else {
-        td.innerHTML = line[key]
-        tr.append(td)
-      }
+      td.innerHTML = line[key]
+      tr.append(td)
     }
+
+    const input = document.createElement('input')
+    input.setAttribute('type', 'checkbox')
+    input.checked = checkedFields.has(line.id)
+    tr.append(input)
+
     tableBody.append(tr)
   })
 }
@@ -105,3 +106,18 @@ function searchName(value, data) {
     return false
   })
 }
+
+//****************CHECKED*******************//
+
+const myCheckedInputs = document.querySelectorAll('input[type=checkbox]')
+myCheckedInputs.forEach(inputEl => {
+  inputEl.addEventListener('click', () => {
+    const currentId = inputEl.parentElement.querySelector('td').innerHTML
+    if(checkedFields.has(currentId)){
+      checkedFields.delete(currentId)
+    } else {
+      checkedFields.add(currentId)
+    }
+    console.log(checkedFields)
+  })
+})
