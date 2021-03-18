@@ -4,10 +4,29 @@ const mockUp = [
   {id: 3, "name": "Such a night", "artist": "Elvis", "genre": "pop", "duration": 2.55, "isChecked": false}
 ]
 
-const addNewEntry = dataArray => {
+const validation = (inputs) => {
+  const errors = {}
+  if(!inputs[0].value) {
+    errors.name = "name must not be empty"
+  }
+  if(!inputs[2].value.length < 3) {
+    errors.genre = "genre must have more than 3"
+  }
+  if (!inputs[3].value) {
+    errors.duration = "duration must not be empty"
+  }
+  return Object.keys(errors).length && errors
+}
+
+const addNewEntry = (dataArray, event) => {
+  event.preventDefault();
   //create new object
   let newObject = {id: dataArray.length + 1}
   let formElements = document.getElementsByClassName('form-el')
+  if(validation(formElements)) {
+    return alert(Object.values(validation(formElements)).join(', '))
+  }
+
   newObject.name = formElements[0].value
   newObject.artist = formElements[1].value
   newObject.genre = formElements[2].value
@@ -18,6 +37,21 @@ const addNewEntry = dataArray => {
   dataArray.push(newObject)
   //re-rendering
   onRender(mockUp)
+}
+
+const sortTable = (element, tableData) => {
+  const fieldName = element.innerHTML, direction = element.getAttribute('data-direction')
+
+  onRender(tableData.sort((a, b) => {
+    if(a[fieldName] < b[fieldName]) {
+      return 1 * direction
+    } else if(a[fieldName] > b[fieldName]) {
+      return -1 * direction
+    } else {
+      return 0
+    }
+  }))
+  element.setAttribute('data-direction', direction * -1)
 }
 
 const onRender = dataArray => {
@@ -42,17 +76,32 @@ const onRender = dataArray => {
   })
 }
 
-//form doesn't refresh
-var form = document.getElementById("myForm");
-function handleForm(event) { 
-  event.preventDefault(); 
-} 
-form.addEventListener('submit', handleForm);
-
-
 onRender(mockUp)
 
 //event listener for submit button - add.
-const submitBtn = document.querySelector('input[type=submit]')
-submitBtn.addEventListener('click', () => addNewEntry(mockUp))
+const form = document.getElementById("myForm");
+form.addEventListener('submit', event => addNewEntry(mockUp, event))
 
+const columnHeadings = document.querySelectorAll('thead > tr > th')
+
+columnHeadings.forEach(item => {
+  item.addEventListener('click', () => sortTable(item, mockUp))
+})
+
+//****************FILTER*******************//
+const myInputSearch = document.getElementById('search')
+myInputSearch.addEventListener('input', () => {
+  const value = myInputSearch.value
+  const data = searchName(value, mockUp)
+  onRender(data)
+})
+
+
+function searchName(value, data) {
+  return data.filter((item) => {
+    for(let key in item) {
+      if(item[key].toString(10).toLowerCase().includes(value.toLowerCase())) return true
+    }
+    return false
+  })
+}
