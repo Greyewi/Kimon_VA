@@ -39,8 +39,6 @@ table {
     margin-top: 75px;
     padding: 10px;
     width: 100%;
-    padding-left: 100px;
-    padding-right: 100px;
 }
 table th {
     background-color: #cccccc;
@@ -80,4 +78,14 @@ input[type="checkbox"] {
 #search:hover {
     background-color: rgb(68, 67, 67);
     color: #fff;
+}
+
+tbody input[type='text'] {
+    border:0;
+    background-color: transparent;
+    font-size: 1em;
+}
+
+tbody input[type='text']:focus {
+    outline: none;
 }
