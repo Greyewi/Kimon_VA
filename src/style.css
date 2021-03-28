@@ -51,7 +51,7 @@ html {
     width: 160px;
 }
 .left-wrapper > div > div > div:nth-child(2) {
-    height: calc(100%-175px);
+    height: calc(100% - 175px);
     width: 160px;
 }
 .right-wrapper {
@@ -82,7 +82,7 @@ html {
     opacity: 1;
 }
 .x > div:first-child {
-    transform: translate(0px, 1.4px) rotate(-45deg);
+    transform: translate(0px, 1px) rotate(-45deg);
 }
 .x > div:last-child {
     transform: translate(0px, -1.4px) rotate(45deg);
@@ -99,16 +99,16 @@ html {
     color: #fff;
 }
 .imagebox1 {
-    background-image: url(./images/wishlist01.jpg);
+    background-image: url(./shared/images/wishlist01.jpg);
 }
 .imagebox2 {
-    background-image: url(./images/wishlist02.jpg)
+    background-image: url(./shared/images/wishlist02.jpg)
 }
 .imagebox3 {
-    background-image: url(./images/wishlist03.jpg)
+    background-image: url(./shared/images/wishlist03.jpg)
 }
 .imagebox4 {
-    background-image: url(./images/wishlist04.png)
+    background-image: url(./shared/images/wishlist04.png)
 }
 .add-container {
     background-color: rgb(66, 65, 65);

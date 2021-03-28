@@ -1,7 +1,4 @@
-import './styles.css'
+import './style.css'
+import {addToWishlist, removeFromWishlist} from './scripts/utils'
 
-const heading = document.createElement('h1')
-heading.textContent = 'Hello world!'
-
-const root = document.querySelector('#root')
-root.append(heading)
+console.log("Webpack is awesome")

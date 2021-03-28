@@ -1,19 +1,27 @@
-const path = require('path')
+const path = require('./paths')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   mode: "development",
+  devServer: {
+    historyApiFallback: true,
+    contentBase: path.base,
+    open: true,
+    compress: true,
+    hot: true,
+    port: 3000
+  },
   entry: {
-    main: path.resolve(__dirname, './src/index.js')
+    main: path.mainJs
   },
   output: {
-    path: path.resolve(__dirname, './dist'),
+    path: path.base,
     filename: "[name].bundle.js"
   },
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Wishlist',
-      template: "./src/template.html",
+      template: path.template,
       filename: "index.html"
     })
   ],
