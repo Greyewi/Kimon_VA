@@ -3,39 +3,48 @@
     margin: 0;
     padding: 0;
 }
+h2 {
+    margin-bottom: 5px;
+}
 html {
     font-family: 'Montserrat', sans-serif;
+}
+body {
+    background-color: rgb(109, 107, 107);
 }
 .main-wrapper {
     display: flex;
     padding: 80px 170px;
-    background-color: rgb(109, 107, 107);
 }
 .left-wrapper {
+    margin-left: 80px;
     height: 890px;
     width: 700px;
     margin-right: 20px;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
 }
 .right-wrapper {
     height: 350px;
     width: 250px;
 }
 .left-wrapper > div {
-    height: calc(800px/3);
-    width: 700px;
     display: flex;
-    margin-bottom: 50px;
+    flex-direction: column;
+    width: 150px;
+    margin: 0 5px;
+    margin-right: 10px;
+    margin-bottom: 40px;
 }
-.left-wrapper > div > div {
-    height: 230px;
-    width: calc(700px/3);
+.left-wrapper > div > .imagebox {
+    height: 210px;
+    width: 150px;
     margin-right: 15px;
     display: flex;
     flex-direction: column;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
+    background-size: contain;
 }
 .left-wrapper > div > div:hover {
     box-shadow: 0px 0px 15px rgb(21, 196, 240);
@@ -55,6 +64,7 @@ html {
     width: 160px;
 }
 .right-wrapper {
+    margin-left: -45px;
     margin-top: 10px;
     display: flex;
     flex-direction: column;
@@ -92,29 +102,22 @@ html {
     text-align: center;
     color: rgb(21, 196, 240);
     font-weight: bold;
+    padding: 3.5px;
+    background-color: rgb(66, 65, 65);
+    margin-bottom: 5px;
 }
 .title {
     font-size: 0.8em;
     text-align: center;
     color: #fff;
 }
-.imagebox1 {
-    background-image: url(./shared/images/wishlist01.jpg);
-}
-.imagebox2 {
-    background-image: url(./shared/images/wishlist02.jpg)
-}
-.imagebox3 {
-    background-image: url(./shared/images/wishlist03.jpg)
-}
-.imagebox4 {
-    background-image: url(./shared/images/wishlist04.png)
-}
-.add-container {
-    background-color: rgb(66, 65, 65);
-}
 .added {
     color: rgb(55, 224, 134);
     font-weight: bold;
     text-align: center;
+}
+.price {
+    text-align: center;
+    color: rgb(184, 183, 183);
+    font-size: 0.9em;
 }
