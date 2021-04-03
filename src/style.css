@@ -42,11 +42,13 @@ body {
     margin-right: 15px;
     display: flex;
     flex-direction: column;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
     background-size: contain;
 }
-.left-wrapper > div > div:hover {
+.left-wrapper > div {
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+.left-wrapper > div:hover {
     box-shadow: 0px 0px 15px rgb(21, 196, 240);
 }
 .left-wrapper > div > div > div:first-child {
