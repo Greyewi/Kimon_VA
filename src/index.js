@@ -1,6 +1,5 @@
-import './style.css'
-import {addToWishlist, removeFromWishlist} from './scripts/utils'
-import {renderGameList} from './scripts/scripts'
+import './style.scss'
+import {addToWishlist, removeFromWishlist, renderGameList} from './scripts/utils'
 import {data} from './scripts/model'
 
 console.log("Webpack is awesome")
