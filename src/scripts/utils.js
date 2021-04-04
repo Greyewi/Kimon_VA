@@ -57,3 +57,5 @@ export const renderGameList = data => {
     container.append(div)
   })
 }
+
+export const objectToArray = object => Object.keys(object).map(item => object[item])
