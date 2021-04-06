@@ -19,6 +19,11 @@ function clearWrapper() {
   })
 }
 
+const gameAlreadyInWishlist = (gameName) => {
+  const wishlist = JSON.parse(window.localStorage.getItem('wishlist'))
+  return wishlist.filter(f => f.name === gameName).length > 0
+}
+
 function handleClear(el) {
   let clearList = document.createElement('p')
   clearList.innerHTML = "Clear List"
@@ -68,39 +73,44 @@ function handlePrice(price) {
 var hasTitles = false;
 
 function handleAdd(addP) {
-  const wishlist = document.querySelector(".right-wrapper");
-  let titles = document.querySelector(".titles-div");
-
-  addP.innerHTML = "Added";
-  addP.setAttribute("class", "added");
-
-  const title = addP.parentElement.querySelector(".title").innerHTML;
-  const price = parseInt(
-    addP.parentElement.querySelector(".price").innerHTML.replaceAll("$", ""),
-    10
-  );
-  sum += price;
-
-  let div = document.createElement("div");
-  div.setAttribute("class", "titles-div");
-
-  div.append(title);
-
-  if (!hasTitles) {
-    wishlist.append(div);
-    hasTitles = true;
-  } else {
-    titles.append(div);
+  const wishlist = JSON.parse(window.localStorage.getItem('wishlist') || '[]')
+  if(gameAlreadyInWishlist(addP.name)) {
+    return
   }
 
-  handlePrice(sum);
+  const newWishList = [...wishlist, addP]
+  window.localStorage.setItem('wishlist', JSON.stringify(newWishList))
+  renderWishList(newWishList)
+  renderGameList(window.gameList)
+}
+
+export const renderWishList = (wishlist) => {
+  const wishlistContainer = document.querySelector(".right-wrapper #item_container");
+  wishlistContainer.innerHTML = ''
+
+  wishlist.map((game) => {
+    const gameContainer = document.createElement('div')
+    const title = document.createElement('span')
+    //const price = document.createElement('span')
+    const closeBtn = document.createElement('span')
+    title.setAttribute("class", "titles-div");
+    closeBtn.setAttribute("class", "del");
+    title.innerHTML = game.name
+    //price.innerHTML = game.price
+    closeBtn.innerHTML = 'x' // TODO add event for remove game
+    gameContainer.append(title)
+    //gameContainer.append(price)
+    gameContainer.append(closeBtn)
+    wishlistContainer.append(gameContainer)
+  })
+
 }
 
 export const renderGameList = (data) => {
   const container = document.querySelector(".left-wrapper");
   container.innerHTML = "";
 
-  data.map((item) => {
+  data.map(item => {
     let div = document.createElement("div");
     let imagediv = document.createElement("div");
     let addP = document.createElement("p");
@@ -124,7 +134,13 @@ export const renderGameList = (data) => {
       priceP.innerHTML = "0 $";
     }
 
-    addP.innerHTML = "Add";
+    if(gameAlreadyInWishlist(item.name)) {
+      addP.innerHTML = "Added";
+      addP.setAttribute("class", "added");
+    } else {
+      addP.innerHTML = "Add";
+    }
+
 
     var img = new Image();
     img.src = item.cover;
@@ -148,12 +164,11 @@ export const renderGameList = (data) => {
     div.append(priceP);
 
     addP.addEventListener("click", () => {
-      handleAdd(addP);
+      handleAdd(item);
     });
 
     container.append(div);
   });
 };
 
-export const objectToArray = (object) =>
-  Object.keys(object).map((item) => object[item]);
+export const objectToArray = (object) => Object.keys(object).map((item) => object[item]);

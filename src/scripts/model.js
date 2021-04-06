@@ -13,4 +13,4 @@ export const data = [
     {id: "12", "name": "F.E.A.R. 3", "price": 149, "cover": "http://s.gama-gama.ru/fullsize/2cdb775b40740ff73d8e02d43fb41a8e.jpg"},
     {id: "13", "name": "Majesty Gold HD", "price": 79, "cover": "http://s.gama-gama.ru/fullsize/5a6bd1cac776d4f672ebed00002d79a3.jpg"},
     {id: "14", "name": "Deep Black Reloaded", "price": 99, "cover": "http://s.gama-gama.ru/fullsize/ec769b08d9cefccda548647a26e0e492.jpg"}
-]  
+]
