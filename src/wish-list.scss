@@ -1,0 +1,102 @@
+.right-wrapper {
+  height: 350px;
+  width: 250px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(66, 65, 65);
+  color: #fff;
+  padding: 15px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0px -10px rgb(0, 0, 0);
+
+  #item_container {
+
+    > div {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      margin:5px 0;
+      padding: 3px 2px;
+
+      &:hover {
+        background-color: $bgColor;
+      }
+
+      .del {
+        opacity: 0;
+        position: relative;
+        right: 3px;
+        bottom: 2px;
+        color:$blueColor;
+        cursor: pointer;
+      }
+
+      &:hover {
+        .del {
+          opacity: 1;
+        }
+      }
+    }
+
+    .count {
+      margin-top: 10px;
+      display: block;
+      margin-bottom: 0;
+
+      &:hover {
+        background: transparent;
+      }
+      .price {
+        color: $blueColor;
+        font-weight: bold;
+        font-family: system-ui;
+      }
+    }
+
+    .clear-wishlist {
+      color: $blueColor;
+      cursor: pointer;
+      padding-bottom: 2px;
+      font-size: 12px;
+
+      &:hover{
+        border-bottom: 1px solid $blueColor;
+      }
+    }
+
+  }
+
+  &:hover {
+    box-shadow: 0px -10px $blueColor;
+
+    .x {
+
+      > div {
+        opacity: 1;
+      }
+    }
+  }
+
+  .x {
+
+    > div {
+      transition: all 0.3s ease-in-out;
+      opacity: 0;
+      position: relative;
+      left: 123px;
+      bottom: 13px;
+      background-color: aqua;
+      height: 3px;
+      width: 15px;
+
+      &:first-child {
+        transform: translate(0px, 1px) rotate(-45deg);
+      }
+
+      &:last-child {
+        transform: translate(0px, -1.4px) rotate(45deg);
+      }
+    }
+  }
+}
