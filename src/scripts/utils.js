@@ -6,71 +6,10 @@ export const removeFromWishlist = (wishList, gameId) => {
   return wishList.filter((f) => f.id !== gameId);
 };
 
-var sum = 0;
-var hasPrice = false;
-let p = document.createElement("p");
-
-function clearWrapper() {
-  document.querySelector('.right-wrapper > div:nth-child(2)').remove()
-  document.querySelector('.right-wrapper > div:nth-child(2)').remove()
-  document.querySelectorAll('.added').forEach((element) => {
-    element.setAttribute('class', 'add')
-    element.innerHTML = "Add"
-  })
-}
-
 const gameAlreadyInWishlist = (gameName) => {
   const wishlist = JSON.parse(window.localStorage.getItem('wishlist'))
   return wishlist.filter(f => f.name === gameName).length > 0
 }
-
-function handleClear(el) {
-  let clearList = document.createElement('p')
-  clearList.innerHTML = "Clear List"
-  clearList.style.color = "rgb(21, 196, 240)"
-  clearList.style.fontSize = 0.8 + "em"
-  clearList.style.textDecoration = "underline"
-  clearList.style.marginTop = 5 + "px"
-  clearList.addEventListener('click', () => {clearWrapper()})
-  el.append(clearList)
-}
-
-function handlePrice(price) {
-  let priceBox = document.querySelector(".right-wrapper > div > p");
-  let div = document.createElement("div");
-  const wishlist = document.querySelector(".right-wrapper");
-  p.innerHTML = "Sum: ";
-  p.style.marginTop = 15 + "px";
-  let span = document.createElement("span");
-  span.innerHTML = price;
-  span.setAttribute("style", "color: rgb(21, 196, 240)");
-  p.append(span);
-  p.innerHTML += " $";
-
-  if (!hasPrice) {
-    div.append(p);
-  } 
-  else {
-    priceBox.innerHTML = "Sum: ";
-    let span = document.createElement("span");
-    span.innerHTML = price;
-    span.setAttribute("style", "color: rgb(21, 196, 240)");
-    p.append(span);
-    p.innerHTML += " $";
-  }
-
-  wishlist.append(div);
-
-  if (!hasPrice) {
-    handleClear(p)
-    hasPrice = true;
-  }
-  else {
-    handleClear(priceBox)
-  }
-}
-
-var hasTitles = false;
 
 function handleAdd(addP) {
   const wishlist = JSON.parse(window.localStorage.getItem('wishlist') || '[]')
@@ -96,10 +35,8 @@ export const renderWishList = (wishlist) => {
     title.setAttribute("class", "titles-div");
     closeBtn.setAttribute("class", "del");
     title.innerHTML = game.name
-    //price.innerHTML = game.price
     closeBtn.innerHTML = 'x' // TODO add event for remove game
     gameContainer.append(title)
-    //gameContainer.append(price)
     gameContainer.append(closeBtn)
     wishlistContainer.append(gameContainer)
   })
@@ -140,7 +77,6 @@ export const renderGameList = (data) => {
     } else {
       addP.innerHTML = "Add";
     }
-
 
     var img = new Image();
     img.src = item.cover;
