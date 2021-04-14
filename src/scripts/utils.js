@@ -48,10 +48,12 @@ export const dragDrop = (gameTarget, game) => {
   const dropZone = document.querySelector('.right-wrapper')
   dropZone.style.border = '2px dashed #ccc'
   const handleDragEnter = e => {
-    if(e.target){
-      handleAdd(game, gameTarget.parentElement)
-      dropZone.style.border = '0'
-      e.target.removeEventListener('dragenter', handleDragEnter)
+    e.target.ondrop = () => {
+      if (e.target) {
+        handleAdd(game, gameTarget.parentElement)
+        dropZone.style.border = '0'
+        e.target.removeEventListener('dragenter', handleDragEnter)
+      }
     }
   }
   dropZone.addEventListener('dragenter', handleDragEnter)
