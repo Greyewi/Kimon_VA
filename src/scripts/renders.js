@@ -1,4 +1,4 @@
-import {handleAdd, gameAlreadyInWishlist, clearWrapper} from './utils'
+import {handleAdd, gameAlreadyInWishlist, clearWrapper, deleteGame} from './utils'
 
 export const renderWishList = (wishlist = []) => {
   const wishlistContainer = document.querySelector(".right-wrapper #item_container");
@@ -8,18 +8,17 @@ export const renderWishList = (wishlist = []) => {
   wishlist.map((game) => {
     const gameContainer = document.createElement('div')
     const title = document.createElement('span')
-    //const price = document.createElement('span')
     const closeBtn = document.createElement('span')
     title.setAttribute("class", "titles-div");
     closeBtn.setAttribute("class", "del");
     title.innerHTML = game.name
-    //price.innerHTML = game.price
     closeBtn.innerHTML = 'x' // TODO add event for remove game
     gameContainer.append(title)
-    //gameContainer.append(price)
+    closeBtn.addEventListener('click', () => {deleteGame(game.name)})
     gameContainer.append(closeBtn)
     wishlistContainer.append(gameContainer)
     count += game.price ? game.price : 0
+
   })
 
   if(wishlist.length){
@@ -52,6 +51,7 @@ export const renderGameList = (data) => {
     let nameP = document.createElement("p");
     let priceP = document.createElement("p");
 
+    div.setAttribute('id', item.name.replaceAll(' ', ''));
     imagediv.setAttribute("class", "imagebox");
     addP.setAttribute("class", "add");
     nameP.setAttribute("class", "title");
