@@ -21,20 +21,41 @@ export function clearWrapper() {
 export const gameAlreadyInWishlist = (gameName) => {
   const stringWishList = window.localStorage.getItem('wishlist')
   const wishlist = stringWishList && JSON.parse(stringWishList)
-  console.log(wishlist);
   return wishlist && wishlist.filter(f => f.name === gameName).length > 0
 }
 
-export function handleAdd(addP, e) {
+export function handleAdd(addP, target) {
   const wishlist = JSON.parse(window.localStorage.getItem('wishlist') || '[]')
   if(gameAlreadyInWishlist(addP.name)) {
     return
   }
-  e.target.innerHTML = "Added"
-  e.target.setAttribute("class", "added");
+  if(target.innerHTML === "Add"){
+    target.innerHTML = "Added"
+    target.setAttribute("class", "added");
+  } else {
+    console.log(target, target.querySelector('.add'))
+    target.querySelector('.add').innerHTML = "Added"
+    target.querySelector('.add').setAttribute("class", "added");
+  }
+
   const newWishList = [...wishlist, addP]
   window.localStorage.setItem('wishlist', JSON.stringify(newWishList))
   renderWishList(newWishList)
 }
 
+export const dragDrop = (gameTarget, game) => {
+  gameTarget.draggable = true
+  const dropZone = document.querySelector('.right-wrapper')
+  dropZone.style.border = '2px dashed #ccc'
+  const handleDragEnter = e => {
+    if(e.target){
+      handleAdd(game, gameTarget.parentElement)
+      dropZone.style.border = '0'
+      e.target.removeEventListener('dragenter', handleDragEnter)
+    }
+  }
+  dropZone.addEventListener('dragenter', handleDragEnter)
+}
+
 export const objectToArray = (object) => Object.keys(object).map((item) => object[item]);
+

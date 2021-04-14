@@ -1,11 +1,11 @@
-import {handleAdd, gameAlreadyInWishlist, clearWrapper, deleteGame} from './utils'
+import {handleAdd, gameAlreadyInWishlist, clearWrapper, deleteGame, dragDrop} from './utils'
 
 export const renderWishList = (wishlist = []) => {
   const wishlistContainer = document.querySelector(".right-wrapper #item_container");
   wishlistContainer.innerHTML = ''
   let count = 0
 
-  wishlist.map((game) => {
+  wishlist && wishlist.map((game) => {
     const gameContainer = document.createElement('div')
     const title = document.createElement('span')
     const closeBtn = document.createElement('span')
@@ -21,7 +21,7 @@ export const renderWishList = (wishlist = []) => {
 
   })
 
-  if(wishlist.length){
+  if(wishlist && wishlist.length){
     const countElement = document.createElement('div')
     countElement.setAttribute("class", "count")
     countElement.innerHTML = `Count: <span class="price">${count}</span>$`
@@ -52,6 +52,7 @@ export const renderGameList = (data) => {
     let priceP = document.createElement("p");
 
     div.setAttribute('id', item.name.replaceAll(' ', ''));
+    //div.setAttribute('draggable', 'true') //  div.draggable = true;
     imagediv.setAttribute("class", "imagebox");
     addP.setAttribute("class", "add");
     nameP.setAttribute("class", "title");
@@ -97,9 +98,14 @@ export const renderGameList = (data) => {
     div.append(nameP);
     div.append(priceP);
 
+    div.addEventListener('mousedown', (e) => {
+      dragDrop(e.target, item)
+    })
+
     addP.addEventListener("click", (e) => {
       handleAdd(item, e);
     });
+
 
     container.append(div);
   });
