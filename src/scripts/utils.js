@@ -47,16 +47,14 @@ export const dragDrop = (gameTarget, game) => {
   gameTarget.draggable = true
   const dropZone = document.querySelector('.right-wrapper')
   dropZone.style.border = '2px dashed #ccc'
-  const handleDragEnter = e => {
-    e.target.ondrop = () => {
+  const handleDragLeave = e => {
       if (e.target) {
         handleAdd(game, gameTarget.parentElement)
         dropZone.style.border = '0'
-        e.target.removeEventListener('dragenter', handleDragEnter)
+        e.target.removeEventListener('dragleave', handleDragLeave)
       }
-    }
   }
-  dropZone.addEventListener('dragenter', handleDragEnter)
+  dropZone.addEventListener('dragleave', handleDragLeave)
 }
 
 export const objectToArray = (object) => Object.keys(object).map((item) => object[item]);

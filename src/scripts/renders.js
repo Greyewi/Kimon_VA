@@ -103,7 +103,7 @@ export const renderGameList = (data) => {
     })
 
     addP.addEventListener("click", (e) => {
-      handleAdd(item, e);
+      handleAdd(item, e.target);
     });
 
 
