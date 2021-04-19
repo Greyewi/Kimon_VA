@@ -1,16 +1,21 @@
 import './style.scss'
 
-function WishList() {
-    return (
-        <div className="right-wrapper">
-            <div>
-                <div><h2>WISHLIST</h2></div>
-                <div>
-                    <input type="text" id="search" placeholder="Search"/>
-                </div>
+function WishList(props) {
+  const {wishList, handleRemoveGame} = props
+
+  return (
+    <div className="right-wrapper">
+      <div>
+        <div><h2>WISHLIST</h2></div>
+        <section>
+          {wishList.map((game, key) => <div key={key}>
+            {game.name}{' '}{game.price}$ <span onClick={() => handleRemoveGame((prevState) => prevState.filter(f => f.name !== game.name))}>X</span>
             </div>
-        </div>
-    );
+          )}
+        </section>
+      </div>
+    </div>
+  )
 }
 
-export default WishList;
+export default WishList
