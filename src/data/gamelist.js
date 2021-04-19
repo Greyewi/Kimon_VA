@@ -1,6 +1,6 @@
 export const objectToArray = (object) => Object.keys(object).map((item) => object[item]);
 
-export default () => objectToArray({
+const gameListData = () => objectToArray({
     "1": {
       "name": "Saints Row 2",
       "price": 49,
@@ -72,3 +72,5 @@ export default () => objectToArray({
     }
   }
 )
+
+export default gameListData;

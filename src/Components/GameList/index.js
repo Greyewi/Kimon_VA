@@ -8,7 +8,7 @@ export function GameList() {
                 return (
                     <div>
                         <div className="imagebox">
-                            <img src={game.cover}/>
+                            <img src={game.cover} alt={game.name} />}
                         </div>
                         <p className="add">Add</p>
                         <p className="title">{game.name}</p>
