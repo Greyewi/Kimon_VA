@@ -1,7 +1,22 @@
 import './style.scss'
 
+function RenderClearBtn() {
+    return (
+        <div className="clearBtn">
+            Clear All
+        </div>
+    )
+}
+
+function ClearBtn(props) {
+    return (
+        (!props.isEmpty) ? <RenderClearBtn wishList={props.wishList} /> : null
+    );
+}
+
 function WishList(props) {
   const {wishList, handleRemoveGame} = props
+    const isEmpty = !wishList.length > 0;
 
   return (
     <div className="right-wrapper">
@@ -13,6 +28,7 @@ function WishList(props) {
             </div>
           )}
         </section>
+          <ClearBtn isEmpty={isEmpty} wishList={wishList} onClick={() => handleRemoveGame(wishList)}/>
       </div>
     </div>
   )
