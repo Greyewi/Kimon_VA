@@ -1,19 +1,19 @@
 import './style.scss'
 import gamelist from "../../data/gamelist"
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useMemo} from 'react'
 
 function AddBtn(props) {
   const {handleAddGame, game, wishList} = props
-  const [isAdded, setIsAdded] = useState(false)
+  const isGameInWishList = useMemo(() => wishList.find(f => f.name === game.name), [wishList, game])
+
+  const [isAdded, setIsAdded] = useState(!!isGameInWishList)
 
   useEffect(() => {
-
-    const isGameInWishList = wishList.find(f => f.name === game.name)
     if(!isGameInWishList && isAdded){
       setIsAdded(false)
     }
 
-  }, [wishList, isAdded, game])
+  }, [isGameInWishList, isAdded])
 
   return(
     <p className={isAdded ? 'added' : 'add'} onClick={() => {

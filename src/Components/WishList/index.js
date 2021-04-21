@@ -1,9 +1,26 @@
 import './style.scss'
-import {useMemo} from 'react';
+import {useState, useMemo, useEffect} from 'react';
 
-function ClearBtn({isEmpty, ...props}) {
+function ClearBtn({wishList, ...props}) {
+  const [check, setCheck] = useState(1)
+
+  useEffect(() => {
+    console.log('START')
+    setCheck(check + 1)
+
+    return () => {
+      console.log('END')
+      setCheck(check + 1)
+    }
+
+  }, [])
+
+  useEffect(() => {
+    console.log('UPDATE', check)
+  }, [check])
+
     return (
-        (!isEmpty) ? <div className="clearBtn" {...props}>Clear All</div> : null
+        <div className="clearBtn" {...props}>Clear All</div>
     );
 }
 
@@ -21,7 +38,7 @@ function WishList(props) {
             </div>
           )}
         </section>
-          <ClearBtn isEmpty={isEmpty} onClick={() => handleRemoveGame(() => [])}/>
+        {!isEmpty && <ClearBtn wishList={wishList} onClick={() => handleRemoveGame(() => [])}/>}
       </div>
     </div>
   )
