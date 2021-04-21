@@ -1,22 +1,15 @@
 import './style.scss'
+import {useMemo} from 'react';
 
-function RenderClearBtn() {
+function ClearBtn({isEmpty, ...props}) {
     return (
-        <div className="clearBtn">
-            Clear All
-        </div>
-    )
-}
-
-function ClearBtn(props) {
-    return (
-        (!props.isEmpty) ? <RenderClearBtn wishList={props.wishList} /> : null
+        (!isEmpty) ? <div className="clearBtn" {...props}>Clear All</div> : null
     );
 }
 
 function WishList(props) {
   const {wishList, handleRemoveGame} = props
-    const isEmpty = !wishList.length > 0;
+    const isEmpty = useMemo(() => !wishList.length > 0, [wishList]) //listen instead of send data
 
   return (
     <div className="right-wrapper">
@@ -28,7 +21,7 @@ function WishList(props) {
             </div>
           )}
         </section>
-          <ClearBtn isEmpty={isEmpty} wishList={wishList} onClick={() => handleRemoveGame(wishList)}/>
+          <ClearBtn isEmpty={isEmpty} onClick={() => handleRemoveGame(() => [])}/>
       </div>
     </div>
   )
